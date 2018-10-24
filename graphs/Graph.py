@@ -1,5 +1,5 @@
-from Digraph import Digraph
-from Edge import Edge
+from graphs.Digraph import Digraph
+from graphs.Edge import Edge
 
 
 class Graph(Digraph):

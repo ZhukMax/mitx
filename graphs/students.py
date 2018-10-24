@@ -1,6 +1,6 @@
-from Edge import Edge
-from Graph import Graph
-from Node import Node
+from graphs.Edge import Edge
+from graphs.Graph import Graph
+from graphs.Node import Node
 
 nodes = [Node("ABC"), Node("ACB"), Node("BAC"), Node("BCA"), Node("CAB"), Node("CBA")]
 
