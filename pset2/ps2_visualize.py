@@ -9,7 +9,7 @@ from tkinter import *
 
 
 class RobotVisualization:
-    def __init__(self, num_robots, width, height, delay = 0.2):
+    def __init__(self, num_robots, width, height, delay=0.2):
         "Initializes a visualization with the specified parameters."
         # Number of seconds to pause after each frame
         self.delay = delay
