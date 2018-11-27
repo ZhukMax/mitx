@@ -1,3 +1,5 @@
+import math
+
 import pylab
 import random
 
@@ -102,7 +104,33 @@ class UsualDrunk(Drunk):
 class ColdDrunk(Drunk):
     @staticmethod
     def take_step():
-        step_choices = [(0.0, 0.9), (0.0, -1.1), (1.0, 0.0), (-1.0, 0.0)]
+        step_choices = [(0.0, 0.9), (0.0, -1.03), (1.03, 0.0), (-1.03, 0.0)]
+        return random.choice(step_choices)
+
+
+class EDrunk(Drunk):
+    @staticmethod
+    def take_step():
+        ang = 2 * math.pi * random.random()
+        length = 0.5 + 0.5 * random.random()
+        return length * math.sin(ang), length * math.cos(ang)
+
+
+class PhotoDrunk(Drunk):
+    @staticmethod
+    def take_step():
+        step_choices =\
+                    [(0.0, 0.5),(0.0, -0.5),
+                     (1.5, 0.0),(-1.5, 0.0)]
+        return random.choice(step_choices)
+
+
+class DDrunk(Drunk):
+    @staticmethod
+    def take_step():
+        step_choices =\
+                    [(0.85, 0.85), (-0.85, -0.85),
+                     (-0.56, 0.56), (0.56, -0.56)]
         return random.choice(step_choices)
 
 
@@ -133,7 +161,7 @@ def sim_all(drunk_kinds, walk_lengths, num_trials):
 def trace_walk(field_kinds, num_steps):
     style_choice = StyleIterator(('b+', 'r^', 'ko'))
     for f_class in field_kinds:
-        d = UsualDrunk('')
+        d = ColdDrunk('')
         f = f_class()
         f.add_drunk(d, Location(0, 0))
         locs = []
