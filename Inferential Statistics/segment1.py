@@ -1,4 +1,5 @@
 import random
+import pylab
 
 
 class FairRoulette():
@@ -105,6 +106,7 @@ def get_mean_and_std(x):
 
 
 def empirical_rule(games, num_trials):
+    result_dict = None
     for g in games:
         result_dict[g.__str__] = []
     for num_spins in (100, 1000, 10000):
@@ -147,9 +149,9 @@ def stdDevOfLengths(L):
 
 
 random.seed(0)
-num_trials = 20
-result_dict = {}
-games = (FairRoulette, EuRoulette, AmRoulette)
+# num_trials = 20
+# result_dict = {}
+# games = (FairRoulette, EuRoulette, AmRoulette)
 # for g in games:
 #     result_dict[g.__str__] = []
 # for num_spins in (100, 1000, 10000, 100000):
@@ -161,4 +163,18 @@ games = (FairRoulette, EuRoulette, AmRoulette)
 
 # empirical_rule(games, num_trials)
 # print(stdDevOfLengths(['apples', 'oranges', 'kiwis', 'pineapples']))
-print(coefficient_of_variation([10, 4, 12, 15, 20, 5]))
+# print(coefficient_of_variation([10, 4, 12, 15, 20, 5]))
+
+
+num_trials = 50000
+num_spins = 200
+game = FairRoulette()
+
+means = []
+for i in range(num_trials):
+    means.append(find_pocket_return(game, 1, num_spins, False)[0] / num_spins)
+
+pylab.hist(means, bins=19, weights=pylab.array(len(means)*[1])/len(means))
+pylab.xlabel('Mean return')
+pylab.ylabel('Probability')
+pylab.title('Expected return betting a pocket')
