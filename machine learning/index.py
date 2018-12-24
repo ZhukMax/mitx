@@ -1,7 +1,7 @@
 import pylab
 
 
-class Animal():
+class Animal:
     def __init__(self, name, egg_laying, scales, poisonous, cold_blood, legs, reptile):
         self.name = name
         self.egg_laying = egg_laying
@@ -15,10 +15,54 @@ class Animal():
         return self.name
 
     def distance(self, another_animal):
-        return 1
+        distance = 0
+        if self.egg_laying != another_animal.egg_laying:
+            distance += 1
+        if self.scales != another_animal.scales:
+            distance += 1
+        if self.poisonous != another_animal.poisonous:
+            distance += 1
+        if self.legs != another_animal.legs:
+            distance += 1
+        if self.cold_blood != another_animal.cold_blood:
+            distance += 1
+        if self.reptile != another_animal.reptile:
+            distance += 1
+
+        return distance
 
     def __str__(self):
         return self.name
+
+
+def std_dev(l):
+    if len(l) == 0:
+        return float('NaN')
+
+    summ = 0
+    for i in l:
+        summ += len(i)
+
+    mean = summ / float(len(l))
+    tot = 0.0
+    for i in l:
+        tot += (len(i) - mean) ** 2
+
+    std = (tot / len(l)) ** 0.5
+    return std
+
+
+def z_scale_features(vals):
+    result = pylab.array(vals)
+    mean = float(sum(vals)) / len(vals)
+    result = result - mean
+    return result / std_dev(result)
+
+
+def i_scale_features(vals):
+    min_vals, max_vals = min(vals), max(vals)
+    fit = pylab.polyfit([min_vals, max_vals], [0, 1], 1)
+    return pylab.polyval(fit, vals)
 
 
 animals = [Animal('cobra', 1, 1, 1, 1, 0, 1),
@@ -56,8 +100,6 @@ def distance_matrix(animals, precision):
                         cellLoc='center',
                         loc='center',
                         colWidths=[0.138] * len(animals))
-    # table.auto_set_front_size(False)
-    # table.set_frontsize(10)
     table.scale(1, 2.5)
     pylab.axis('off')
     pylab.savefig('distance')

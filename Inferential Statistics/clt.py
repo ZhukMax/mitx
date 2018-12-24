@@ -28,6 +28,9 @@ mean, std = plot_means(1, 1000000, 19, '1 die', 'b', '*')
 print('Mean of rolling 1 die =', str(mean), ',', 'Std =', std)
 mean, std = plot_means(50, 1000000, 19, 'Mean of 50 die', 'r', '//')
 print('Mean of rolling 50 die =', str(mean), ',', 'Std =', std)
+
+# pylab.hist(xVals, 100, color='b', label='xVals', weights=pylab.array(len(xVals)*[1])/len(xVals), hatch='*')
+
 pylab.title('Rolling Continuous Dice')
 pylab.xlabel('Value')
 pylab.ylabel('Probability')

@@ -95,6 +95,7 @@ def find_pocket_return(game, num_trials, trial_size, to_print=True):
     return pocket_returns
 
 
+# Standard Deviation & Mean of array of numbers
 def get_mean_and_std(x):
     mean = sum(x) / float(len(x))
     tot = 0.0
@@ -125,6 +126,7 @@ def coefficient_of_variation(x):
     return std / mean
 
 
+# Стандартное отклонение массива строк / standard deviation
 def stdDevOfLengths(L):
     """
     L: a list of strings
